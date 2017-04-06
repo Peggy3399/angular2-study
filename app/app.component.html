@@ -1,0 +1,16 @@
+<template  #foo let-name="name" let-skills="skills">
+    <h4>{{name}}</h4>
+    <ul>
+      <li *ngFor="let s of skills">{{s}}</li>
+    </ul>
+</template>
+<div [ngTemplateOutlet]="foo" [ngOutletContext]="msg1"></div>
+<h1 style="background: yellow;">{{text}}</h1>
+<div [ngTemplateOutlet]="foo" [ngOutletContext]="msg2"></div>
+<hr>
+<template #foo1 let-name="name" let-age="age">
+  <h2>name: {{name}}</h2>
+  <h2>age: {{age}}</h2>
+</template>
+<div *ngFor="let child of children; let i=index" [ngTemplateOutlet]="foo1" [ngOutletContext]="child">
+</div>
