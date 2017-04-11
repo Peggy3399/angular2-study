@@ -1,16 +1,44 @@
-<template  #foo let-name="name" let-skills="skills">
-    <h4>{{name}}</h4>
-    <ul>
-      <li *ngFor="let s of skills">{{s}}</li>
-    </ul>
+<h2>ngTemplateOutlet && ngOutletContext</h2>
+<template #foo let-name="name" let-skills="skills">
+  <h4>{{name}}</h4>
+  <ul>
+    <li *ngFor="let s of skills">{{s}}</li>
+  </ul>
 </template>
 <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg1"></div>
-<h1 style="background: yellow;">{{text}}</h1>
+<h3 style="background: yellow;">{{text}}</h3>
 <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg2"></div>
 <hr>
-<template #foo1 let-name="name" let-age="age">
-  <h2>name: {{name}}</h2>
-  <h2>age: {{age}}</h2>
-</template>
-<div *ngFor="let child of children; let i=index" [ngTemplateOutlet]="foo1" [ngOutletContext]="child">
+<h2>ngSwitch</h2>
+<h4> Current choice is {{ choice }}</h4>
+<div>
+    <ul [ngSwitch]="choice">
+        <li *ngSwitchCase="1">First choice</li>
+        <li *ngSwitchCase="2">Second choice</li>
+        <li *ngSwitchCase="3">Third choice</li>
+        <li *ngSwitchCase="4">Fourth choice</li>
+        <li *ngSwitchCase="2">Second choice, again</li>
+        <li *ngSwitchDefault>Default choice</li>
+    </ul>
+</div>
+<div style="margin-top: 20px;">
+    <button (click)="nextChoice()"> Next choice </button>
+</div>
+<hr>
+<h2>NgStyle</h2>
+<div>
+    <input type="text" name="color" #colorinput>
+    <input type="text" name="fontSize" #fontinput>
+    <button (click)="apply(colorinput.value, fontinput.value)"> apply </button>
+</div>
+<div>
+    <p [ngStyle]="style()">hello hello hello</p>
+    <span [ngStyle]="{color: colorinput.value, 'background-color': 'blue'}" [style.font-size.px]="fontSize">color :{{ colorinput.value }} font: {{fontinput.value}}</span>
+</div>
+<hr>
+<h2>NgNonBindable</h2>
+<div>
+<span class="bordered">{{ content }}</span>
+<span class="pre" ngNonBindable>
+    &lt;-- This is what {{ content }} rendered </span>
 </div>
