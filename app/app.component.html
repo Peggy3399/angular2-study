@@ -2,28 +2,12 @@
 <template #foo let-name="name" let-skills="skills">
   <h4>{{name}}</h4>
   <ul>
-    <li *ngFor="let s of skills">{{s}}</li>
+    <li *ngFor="let s of skills | slice:0:2">{{s}}</li>
   </ul>
 </template>
 <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg1"></div>
 <h3 style="background: yellow;">{{text}}</h3>
 <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg2"></div>
-<hr>
-<h2>ngSwitch</h2>
-<h4> Current choice is {{ choice }}</h4>
-<div>
-    <ul [ngSwitch]="choice">
-        <li *ngSwitchCase="1">First choice</li>
-        <li *ngSwitchCase="2">Second choice</li>
-        <li *ngSwitchCase="3">Third choice</li>
-        <li *ngSwitchCase="4">Fourth choice</li>
-        <li *ngSwitchCase="2">Second choice, again</li>
-        <li *ngSwitchDefault>Default choice</li>
-    </ul>
-</div>
-<div style="margin-top: 20px;">
-    <button (click)="nextChoice()"> Next choice </button>
-</div>
 <hr>
 <h2>NgStyle</h2>
 <div>
@@ -36,9 +20,44 @@
     <span [ngStyle]="{color: colorinput.value, 'background-color': 'blue'}" [style.font-size.px]="fontSize">color :{{ colorinput.value }} font: {{fontinput.value}}</span>
 </div>
 <hr>
+<h2>NgIf</h2>
+  <div *ngIf="true">111</div>
+  <div *ngIf="a < b">a：{{a}}, b：{{b}}</div>
+  <div *ngIf="str === 'yes'">{{str}}</div>
+  <div *ngIf="myFunc()">444</div>
+<hr>
+<h2>NgClass</h2>
+<div class="base" [ngClass]="classList">
+    This is {{ classList.indexOf('blue') > -1 ? "" : "NOT" }} blue and {{ classList.indexOf('round') > -1 ? "" : "NOT" }} round
+  </div>
+
+  <div [class.change1]="className">到此一游哈哈哈</div>
+  <div [class.change2]="className">到此二游哈哈哈</div>
+  <div [ngClass]="{'change1':(className === true)}">到此三游哈哈哈</div>
+  <div [ngClass]="{'change1':select1,'change2':select2,'change3':select3}">到此四游哈哈哈</div>
+<hr>
+<h2>ngSwitch</h2>
+<h4> Current choice is {{ choice }}</h4>
+<div>
+    <ul [ngSwitch]="choice">
+        <li *ngSwitchCase="1">First choice</li>
+        <li *ngSwitchCase="2">Second choice</li>
+        <li *ngSwitchCase="3">Third choice</li>
+        <li *ngSwitchCase="4">Fourth choice</li>
+        <li *ngSwitchCase="2">Second choice, again</li>
+        <li *ngSwitchDefault>Default choice</li>
+    </ul>
+    <p *ngIf="choice === 2">我出来了！</p>
+</div>
+<div style="margin-top: 20px;">
+    <button (click)="nextChoice()"> Next choice </button>
+</div>
+<hr>
 <h2>NgNonBindable</h2>
 <div>
 <span class="bordered">{{ content }}</span>
 <span class="pre" ngNonBindable>
     &lt;-- This is what {{ content }} rendered </span>
 </div>
+<hr>
+

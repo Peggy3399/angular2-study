@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
+
+declare var $ : any;
 
 @Component({
     moduleId: module.id,
@@ -7,23 +9,32 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit,
+AfterViewInit {
     msg1 : any;
     msg2 : any;
     text = '分割线';
-    children: any;
-    favoriteHero: true;
+    children : any;
+    favoriteHero : true;
     choice : any;
-    color: any;
-    fontSize: any;
-    content: string;
+    color : any;
+    fontSize : any;
+    content : string;
+    name : string = 'thoughtram';
+    options : any;
+    str : string = "yes";
+    a: number = 0;
+    b: number = 1;
+    classList: any[] = ['blue', 'round'];
+    className: boolean = true;
+    select2: boolean = true;
 
     constructor() {}
 
     ngOnInit() {
         this.msg1 = {
             name: "Zhentian",
-            skills: ["JS", "Angular"]
+            skills: ["JS", "Angular", "jjjjjj"]
         };
         this.msg2 = {
             name: "Wan",
@@ -31,25 +42,32 @@ export class AppComponent implements OnInit {
         };
         this.choice = 0;
         this.content = '1234567890'
+
     }
+
+    ngAfterViewInit() {}
 
     nextChoice() {
-      this.choice ++;
-      if(this.choice === 7){
+        this.choice++;
+        if (this.choice === 7) {
             this.choice = 0;
-      }
+        }
     }
 
-    apply(color: any, font: any) {
+    apply(color : any, font : any) {
         this.color = color;
         this.fontSize = font;
     }
 
-    style(){
+    style() {
         let styles = {
-          color: 'red',
-          fontSize: '12px'
+            color: 'red',
+            fontSize: '12px'
         }
         return styles;
+    }
+
+    myFunc(){
+        return true;
     }
 }

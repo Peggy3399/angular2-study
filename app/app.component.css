@@ -1,6 +1,29 @@
-.foo1{
+.foo1 {
   float: left;
   width: 200px;
   margin-right: 10px;
+  background: green;
+}
+#sortable{
+  height: 120px;
+}
+.blue{
+  color: #fff;
+  background: blue;
+  line-height: 50px;
+}
+.round{
+  border-radius: 8px;
+  line-height: 30px;
+}
+.change1 {
+  line-height: 30px;
+  background: lightgreen;
+  width: 200px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  height: 30px;
+}
+.change2{
   background: green;
 }
