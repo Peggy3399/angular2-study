@@ -4,6 +4,9 @@
   <ul>
     <li *ngFor="let s of skills | slice:0:2">{{s}}</li>
   </ul>
+  <template ngFor let-s [ngForOf]="skills">
+    <div>{{ s }}</div>
+  </template>
 </template>
 <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg1"></div>
 <h3 style="background: yellow;">{{text}}</h3>
@@ -17,7 +20,7 @@
 </div>
 <div>
     <p [ngStyle]="style()">hello hello hello</p>
-    <span [ngStyle]="{color: colorinput.value, 'background-color': 'blue'}" [style.font-size.px]="fontSize">color :{{ colorinput.value }} font: {{fontinput.value}}</span>
+    <span [ngStyle]="{color: colorinput.value, 'background-color': 'blue'}" [style.font-size.px]="fontSize">color :{{ colorinput.value }} font: {{fontinput.value}}px</span>
 </div>
 <hr>
 <h2>NgIf</h2>
@@ -60,4 +63,13 @@
     &lt;-- This is what {{ content }} rendered </span>
 </div>
 <hr>
+<h2>Directive---属性型指令</h2>
+<!--<article prefixHightlight>hover me</article>-->
 
+<article [prefixHightlight] = "'yellow'">hover me1</article>
+<article [prefixHightlight] = "'purple'">hover me2</article>
+<article [prefixHightlight] = "'green'">hover me3</article>
+
+<hr>
+<h2>Directive---结构型指令</h2>
+<h1 *myUnless="false">Oh! My god!</h1>

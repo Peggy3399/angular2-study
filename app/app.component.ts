@@ -1,16 +1,13 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
-
-declare var $ : any;
+import {Component, OnInit, AfterViewInit, Input, HostListener} from '@angular/core';
 
 @Component({
     moduleId: module.id,
     selector: 'my-app',
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css']
+    styleUrls: ['app.component.css'],
 })
 
-export class AppComponent implements OnInit,
-AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
     msg1 : any;
     msg2 : any;
     text = '分割线';
@@ -28,10 +25,13 @@ AfterViewInit {
     classList: any[] = ['blue', 'round'];
     className: boolean = true;
     select2: boolean = true;
+    // highlightColor: any = 'yellow';
 
     constructor() {}
 
+
     ngOnInit() {
+        console.log(`AppComponent has inited : ${ Date.now() }`);
         this.msg1 = {
             name: "Zhentian",
             skills: ["JS", "Angular", "jjjjjj"]

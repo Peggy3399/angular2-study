@@ -1,20 +1,10 @@
 ## Angular2内置指令
 
-### NgTemplateOutlet
+  Angular2 指令是构成Angular2应用程序的重要组成部分，指令主要用来对模板的标签或者元素附加一些新的特性或者功能，改变一个 DOM 元素的外观或行为，主要存在两种类型的指令：
 
-  我们可以建立一个模板,使用这个模板,通过在不同的上下文可重用
+  * 结构型指令：会通过添加 / 删除 DOM 元素来更改 DOM 树布局
+  * 属性型指令：指令改变一个元素的外观或行为。
 
-```
-    <template  #foo let-name="name" let-skills="skills">
-        <h4>{{name}}</h4>
-        <ul>
-          <li *ngFor="let s of skills">{{s}}</li>
-        </ul>
-    </template>
-    <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg1"></div>
-    <h1 style="background: yellow;">{{text}}</h1>
-    <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg2"></div>
-```
 ### NgStyle
 
   NgStyle 指令，可以通过angular表达式为DOM元素设置一个CSS属性。
@@ -75,9 +65,6 @@
 ```
   <div [ngClass]="{'change1':select1,'change2':select2,'change3':select3}"></div>
 
-  $scope.select=true;
-  $scope.lala=true;
-
   <div [ngClass]="{'change1':(className == 'select1')}"></div>
 ```
 
@@ -99,9 +86,9 @@
 
 ### NgNonBindable
 
-    当我们想告诉angular不编译或绑定我们的页面的特定部分,我们使用ngNonBindable
+  当我们想告诉angular不编译或绑定我们的页面的特定部分,我们使用ngNonBindable
 
-    比方说，我们要渲染在我们模板中的纯字符串 {{content}}。通常，该文本将因为我们使用的 {{}} 模板语法绑定到content变量的值。
+  比方说，我们要渲染在我们模板中的纯字符串 {{content}}。通常，该文本将因为我们使用的 {{}} 模板语法绑定到content变量的值。
 
 ```
     <span class="bordered">{{ content }}</span>
@@ -109,9 +96,75 @@
         &lt;-- This is what {{ content }} rendered </span>
     </div>
 ```
-## NgZone
+### NgTemplateOutlet
+
+  我们可以建立一个模板,使用这个模板,通过在不同的上下文可重用
+
+```
+    <template  #foo let-name="name" let-skills="skills">
+        <h4>{{name}}</h4>
+        <ul>
+          <li *ngFor="let s of skills">{{s}}</li>
+        </ul>
+    </template>
+    <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg1"></div>
+    <h1 style="background: yellow;">{{text}}</h1>
+    <div [ngTemplateOutlet]="foo" [ngOutletContext]="msg2"></div>
+```
+
+## 自定义指令
+
+  ### 属性型指令 
+
+  * [Directive](http://blog.csdn.net/shenlei19911210/article/details/53218074) 提供@Directive装饰器功能。
+  * ElementRef：是一个服务，注入到指令构造函数中，这样代码可以访问 DOM 元素。
+  * Input：将数据从绑定表达式传达到指令中。
+  * Renderer：写在构造函数中，让代码可以改变 DOM 元素的属性等（setElementAttribute，setElementStyle，setElementClass等）。
+  * host：添加监听事件。
   
 
+  @Directive装饰器需要一个 CSS 选择器(属性名称加方括号-[attr])，以便从模板中识别出关联到这个指令的 HTML。 
+  指令的选择器是[myHighlight]，Angular将会在模板中找到所有带myHighlight属性的元素。
+
+  > 一定要记住在 @NgModule 的 declarations 数组中显示的声明我们定义的指令。
+
+```
+  import { Directive, ElementRef, Renderer, HostListener, Input } from '@angular/core';
+
+  @Directive({
+      selector: '[prefixHightlight]',
+      host: {
+          '(click)': 'onclick()',
+          '(mouseleave)': 'onMouseLeave()',
+          '(mouseenter)': 'onMouseEnter()'
+      }
+  })
+```
+
+  使用数据绑定向指令传递值,在定义这个属性的时候，我们调用了@Input()装饰器。
+
+```
+  @Input('prefixHightlight') highlightColor: string;
+```
+
+  添加监听事件另一种就是通过 @HostListener，直接操纵 DOM 元素的方式给宿主 DOM 元素附加一个事件监听器。
+  
+```
+  @HostListener('mouseenter')
+  onMouseEnter() {}
+```
+  ### 结构型指令
+
+  [结构型指令](http://blog.csdn.net/u010130282/article/details/53613297)需要在构造方法注入TemplateRef和ViewContainerRef这两个服务，TemplateRef用于访问组件模板，ViewContainerRef是渲染器，用于往DOM插入或移除模板等。
+
+  > 注意属性型和结构型子在dom元素中的写法
+
+## NgZone
+  
   [关于zone](http://www.cnblogs.com/czaiz/p/6530820.html)：简单的可以概述成zone是一个异步事件拦截器，也就是说zone能够hook到异步任务的执行上下文，以此来处理一些操作，比如说，在我们每次启动或者完成一个异步的操作、进行堆栈的跟踪处理、某段功能代码进入或者离开zone，我们可以在这些关键的节点重写我们所需处理的方法。
 
   实际上，ngZone是基于[zone.js](http://www.cnblogs.com/whitewolf/p/zone-js.html)来实现的，Angular2 fork了zone.js，它是zone派生出来的一个子zone，在Angular环境内注册的异步事件都运行在这个子zone上(因为ngZone拥有整个Angular运行环境的执行上下文)
+
+## 总结
+
+  积少成多，小角色也有大作用。
