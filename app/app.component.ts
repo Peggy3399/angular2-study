@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
     ngOnInit() {
-        console.log(this.zone)
+        // console.log(this.zone)
         console.log(`AppComponent has inited : ${ Date.now() }`);
         this.msg1 = {
             name: "Zhentian",

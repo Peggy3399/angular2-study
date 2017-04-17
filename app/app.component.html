@@ -1,4 +1,4 @@
-<h2>ngTemplateOutlet && ngOutletContext</h2>
+<!--<h2>ngTemplateOutlet && ngOutletContext</h2>
 <template #foo let-name="name" let-skills="skills">
   <h4>{{name}}</h4>
   <ul>
@@ -72,5 +72,15 @@
 
 <hr>
 <h2>Directive---结构型指令</h2>
-<h1 *myUnless="false">Oh! My god!</h1>
-
+<h1 *myUnless="false">Oh! My god!</h1>-->
+<hr>
+<h2>路由</h2>
+<nav class="sidebar-nav">
+  <a routerLink="/todo/list" routerLinkActive="active">todoList</a>
+  <a routerLink='/todo/item' routerLinkActive="active">todoItem</a>
+</nav>
+<main class="main">
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</main>

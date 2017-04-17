@@ -178,3 +178,4 @@
   [关于zone](http://www.cnblogs.com/czaiz/p/6530820.html)：简单的可以概述成zone是一个异步事件拦截器，也就是说zone能够hook到异步任务的执行上下文，以此来处理一些操作，比如说，在我们每次启动或者完成一个异步的操作、进行堆栈的跟踪处理、某段功能代码进入或者离开zone，我们可以在这些关键的节点重写我们所需处理的方法。
 
   实际上，ngZone是基于[zone.js](http://www.cnblogs.com/whitewolf/p/zone-js.html)来实现的，Angular2 fork了zone.js，它是zone派生出来的一个子zone，在Angular环境内注册的异步事件都运行在这个子zone上(因为ngZone拥有整个Angular运行环境的执行上下文)。
+
