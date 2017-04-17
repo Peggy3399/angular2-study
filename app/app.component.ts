@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, Input, HostListener} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Input, HostListener, NgZone} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -27,10 +27,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     select2: boolean = true;
     // highlightColor: any = 'yellow';
 
-    constructor() {}
+    constructor(private zone: NgZone) {}
 
 
     ngOnInit() {
+        console.log(this.zone)
         console.log(`AppComponent has inited : ${ Date.now() }`);
         this.msg1 = {
             name: "Zhentian",

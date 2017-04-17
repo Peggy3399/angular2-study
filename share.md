@@ -160,11 +160,21 @@
   > 注意属性型和结构型子在dom元素中的写法
 
 ## NgZone
-  
+
+  Angular应用程序通过组件实例和模板之间进行数据交互，也就是将组件的数据和页面DOM元素关连起来，当数据有变化后，NG2能够监测到这些变化并更新视图，反之亦然，它的数据流向是单项的，通过属性绑定和事件绑定来实现数据的流入和流出，数据从属性绑定流入组件，从事件流出组件，数据的双向绑定就是通过这样来实现的。
+
+  ### 进行变化监测的情形
+
+  angular需要去更新视图的情形： 
+
+  * event：在view中绑定事件来监听用户的操作，如果数据有变更则更新视图；
+  * xmlHTTPRequest/webSocket：例如从远端服务拉取对应的数据，这是一个异步的过程；
+  * timeout：例如：setTimeout, setInterval, requestAnimationFrame都是在某个延时后触发。
+
+  (requestAnimationFrame)[http://www.zhangxinxu.com/wordpress/tag/requestanimationframe/]
+
+  这些都是异步的处理，即需要使用异步回调函数，结论就是，不管任何时候的一个异步操作，我们应用程序状态可能已经被改变，这就需要告诉Angular去更新视图。
+
   [关于zone](http://www.cnblogs.com/czaiz/p/6530820.html)：简单的可以概述成zone是一个异步事件拦截器，也就是说zone能够hook到异步任务的执行上下文，以此来处理一些操作，比如说，在我们每次启动或者完成一个异步的操作、进行堆栈的跟踪处理、某段功能代码进入或者离开zone，我们可以在这些关键的节点重写我们所需处理的方法。
 
-  实际上，ngZone是基于[zone.js](http://www.cnblogs.com/whitewolf/p/zone-js.html)来实现的，Angular2 fork了zone.js，它是zone派生出来的一个子zone，在Angular环境内注册的异步事件都运行在这个子zone上(因为ngZone拥有整个Angular运行环境的执行上下文)
-
-## 总结
-
-  积少成多，小角色也有大作用。
+  实际上，ngZone是基于[zone.js](http://www.cnblogs.com/whitewolf/p/zone-js.html)来实现的，Angular2 fork了zone.js，它是zone派生出来的一个子zone，在Angular环境内注册的异步事件都运行在这个子zone上(因为ngZone拥有整个Angular运行环境的执行上下文)。
