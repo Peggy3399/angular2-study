@@ -36,22 +36,21 @@
 
 ```
   import { NgModule } from '@angular/core';
-  import { RouterModule } from '@angular/router';
-
+  import { RouterModule, Routes } from '@angular/router';
+  
+  const routes: Routes = [{
+      path: '',
+      redirectTo: '/todo/list',
+      pathMatch: 'full'
+  }, {
+      path: 'todo/list',
+      component: TodoListComponent
+  }, {
+      path: 'todo/detail/:id',
+      component: TodoDetailComponent
+  }];
   @NgModule({
-      imports: [RouterModule.forRoot([
-          {
-              path: '',
-              redirectTo: '/todo/list',
-              pathMatch: 'full'
-          }, {
-              path: 'todo/list',
-              component: TodoListComponent
-          }, {
-              path: 'todo/detail/:id',
-              component: TodoDetailComponent
-          }
-      ])],
+      imports: [RouterModule.forRoot(routes)],
       exports: [RouterModule]
   })
 ```
@@ -60,7 +59,7 @@
 
    上面使用 redirectTo: '/todo/list'，重定向到任务列表。当我们使用 redirectTo重定向时，需要 pathMatch来指定匹配方式，也就是如何匹配上面的 ''。我们可以完全匹配 full,也可以匹配前缀 prefix。
 
-## 路由器
+### 路由器
 
 #### 设置载入点
 
@@ -132,3 +131,33 @@
   }
 ```
 ## 路由嵌套
+
+  在需要加载的组件下写children，写法与路由的写法一致
+
+```
+  import { NgModule } from '@angular/core';
+  import { RouterModule, Routes } from '@angular/router';
+
+  const appChildRoutes: Routes = [
+      {path: '', redirectTo: "one" },
+      {path: "one", component: TodoListComponent},
+      {path: "two", component: TodoList2Component}
+  ]
+
+  const routes: Routes = [{
+      path: '',
+      redirectTo: '/todo/list',
+      pathMatch: 'full'
+  }, {
+      path: 'todo/list',
+      component: TodoListComponent
+  }, {
+      path: 'todo/detail/:id',
+      component: TodoDetailComponent,
+      children: appChildRoutes
+  }];
+  @NgModule({
+      imports: [RouterModule.forRoot(routes)],
+      exports: [RouterModule]
+  })
+```

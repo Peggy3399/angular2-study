@@ -9,20 +9,10 @@ const TODOLIST: Todo[] = [
     { id: 4, name: 'Celeritas' }
 ]
 
-const TODOLIST2: Todo[] = [
-    { id: 5, name: 'Rose' },
-    { id: 6, name: 'Peggy' },
-    { id: 7, name: 'Tom' },
-    { id: 8, name: 'Jack' }
-]
-
 @Injectable()
 export class TodoService {
     getTodoList(): Promise<Todo[]> {
         return Promise.resolve(TODOLIST);
-    }
-    getTodoList2(): Promise<Todo[]> {
-        return Promise.resolve(TODOLIST2);
     }
     getTodoById (id: number): Promise<Todo> {
         return this.getTodoList()
